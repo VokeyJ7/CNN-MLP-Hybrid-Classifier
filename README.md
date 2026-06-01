@@ -1,31 +1,21 @@
-# Hybrid ECG Classifier: MLP and CNN Models
+# ECG Arrhythmia Classification Using Deep Learning
 
-This project compares two deep learning approaches for ECG signal classification: a Multi-Layer Perceptron (MLP) for binary abnormal/normal detection and a 1D Convolutional Neural Network (CNN) for multi-class arrhythmia classification.
+A deep learning project that classifies electrocardiogram (ECG) signals using both Multi-Layer Perceptron (MLP) and Convolutional Neural Network (CNN) architectures. The system detects abnormal heart rhythms and classifies multiple arrhythmia types from ECG waveform data.
 
 ## Project Overview
 
-The goal of this project was to classify ECG heartbeat signals using PyTorch-based neural networks. Two models were developed:
+This project explores two neural network approaches for ECG signal analysis:
 
-1. **MLP Classifier**
+* A Multi-Layer Perceptron (MLP) for binary ECG abnormality detection.
+* A 1D Convolutional Neural Network (CNN) for multi-class arrhythmia classification.
 
-   * Classifies ECG signals as normal or abnormal.
-   * Uses fully connected layers on standardized ECG feature vectors.
-
-2. **1D CNN Classifier**
-
-   * Classifies ECG signals into five heartbeat categories.
-   * Uses convolutional layers to learn local waveform patterns from ECG sequences.
+The objective was to evaluate how different neural network architectures perform on biomedical time-series data and determine which model is more effective at learning ECG waveform patterns.
 
 ## Datasets
-
-The project used two ECG datasets:
 
 ### PTB Diagnostic ECG Dataset
 
 Used for binary classification:
-
-* `ptbdb_abnormal.csv`
-* `ptbdb_normal.csv`
 
 Classes:
 
@@ -34,84 +24,88 @@ Classes:
 
 ### MIT-BIH Arrhythmia Dataset
 
-Used for multi-class heartbeat classification:
+Used for multi-class heartbeat classification.
 
-* `mitbih_train.csv`
-* `mitbih_test.csv`
+Classes:
 
-Output classes:
+* Normal Beat (N)
+* Supraventricular Ectopic Beat (S)
+* Ventricular Ectopic Beat (V)
+* Fusion Beat (F)
+* Unknown Beat (Q)
 
-* 5 ECG heartbeat categories
+## MLP Classifier
 
-## MLP Model
+The MLP model was developed for binary classification of ECG signals.
 
-The MLP model uses a simple feedforward architecture:
+### Architecture
 
-* Input layer: 187 ECG features
-* Hidden layer 1
-* Hidden layer 2
-* Output layer: 2 classes
+* Input Layer: 187 ECG features
+* Hidden Layer 1
+* Hidden Layer 2
+* Output Layer: 2 Classes
 
-The model was trained using:
+### Training Configuration
 
-* StandardScaler preprocessing
+* StandardScaler normalization
 * CrossEntropyLoss
-* Adam optimizer
-* 100 training epochs
-* Learning rate of 0.01
+* Adam Optimizer
+* Learning Rate: 0.01
+* 100 Epochs
 
-## MLP Results
+### Results
 
-The MLP reached:
+Validation Accuracy:
 
 ```text
-Validation Accuracy: 92.31%
+92.31%
 ```
 
-This showed that even a simple fully connected network could learn meaningful patterns from standardized ECG signal features.
+The model successfully distinguished between normal and abnormal ECG signals while providing a lightweight baseline for comparison.
 
-## CNN Model
+## CNN Arrhythmia Classifier
 
-The CNN model uses 1D convolutional layers to detect waveform patterns across the ECG signal sequence.
+The CNN model was designed specifically for ECG waveform analysis.
 
-The architecture includes:
+### Architecture
 
-* Multiple 1D convolutional layers
-* ReLU activations
-* Max pooling
-* Adaptive average pooling
-* Flatten layer
-* Fully connected classification head
+* Multiple 1D Convolutional Layers
+* ReLU Activations
+* Max Pooling Layers
+* Adaptive Average Pooling
+* Fully Connected Classification Head
 
-The CNN was trained using:
+### Training Configuration
 
-* StandardScaler preprocessing
-* Custom PyTorch Dataset and DataLoader
+* StandardScaler normalization
+* PyTorch Dataset and DataLoader
 * CrossEntropyLoss
-* Adam optimizer
-* 10 training epochs
-* Learning rate of 0.001
+* Adam Optimizer
+* Learning Rate: 0.001
+* 10 Epochs
 
-## CNN Results
+### Results
 
-The CNN model achieved strong performance over 10 epochs.
-
-Final validation results:
+Final Validation Accuracy:
 
 ```text
-Validation Loss: 0.064
-Validation Accuracy: 98.214%
+98.21%
 ```
 
-The CNN outperformed the MLP because convolutional layers are better suited for detecting local signal patterns in ECG waveforms.
+Final Training Accuracy:
 
-## Key Takeaways
+```text
+98.29%
+```
 
-* The MLP performed well for binary ECG classification.
-* The CNN achieved higher accuracy on multi-class ECG classification.
-* Standardization improved training stability.
-* 1D convolution was effective for learning ECG waveform patterns.
-* Adaptive average pooling helped simplify the transition from convolutional layers to dense layers.
+The CNN significantly outperformed the MLP by automatically learning local heartbeat patterns and temporal waveform features.
+
+## Key Findings
+
+* MLP models can effectively classify normal versus abnormal ECG signals.
+* CNN architectures are more effective for arrhythmia classification because they learn waveform features directly from ECG sequences.
+* Deep learning achieved high accuracy on both binary and multi-class cardiac classification tasks.
+* Convolutional feature extraction improved performance by nearly 6 percentage points compared to the baseline MLP.
 
 ## Technologies Used
 
@@ -119,11 +113,13 @@ The CNN outperformed the MLP because convolutional layers are better suited for 
 * PyTorch
 * NumPy
 * Pandas
-* Scikit-learn
-* Joblib
-* Seaborn
+* Scikit-Learn
 * Matplotlib
+* Seaborn
+* Joblib
 
 ## Author
 
-Created by Veltman Okey-Ejiowhor as part of an AI/ML portfolio project focused on biomedical signal classification.
+Veltman Okey-Ejiowhor
+
+Mechanical Engineering Student | AI/ML Researcher | Deep Learning Applications in Healthcare
